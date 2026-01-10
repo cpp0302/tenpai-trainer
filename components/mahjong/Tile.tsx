@@ -19,13 +19,23 @@ export default function Tile({ tile, size = "md", className = "" }: TileProps) {
   const { width, height } = sizeMap[size];
 
   return (
-    <div className={`inline-block ${className}`}>
+    <div className={`inline-block relative ${className}`} style={{ width, height }}>
+      {/* 背景（牌の枠） */}
+      <Image
+        src="/tiles/Front.svg"
+        alt="tile-front"
+        width={width}
+        height={height}
+        className="absolute inset-0 select-none"
+        draggable={false}
+      />
+      {/* 牌の模様 */}
       <Image
         src={`/tiles/${fileName}`}
         alt={fileName}
         width={width}
         height={height}
-        className="select-none"
+        className="absolute inset-0 select-none"
         draggable={false}
       />
     </div>
