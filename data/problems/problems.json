@@ -1,0 +1,79 @@
+[
+  {
+    "id": "p0001",
+    "difficulty": "practical",
+    "table": {
+      "round": {
+        "roundWind": "east",
+        "roundNumber": 1,
+        "honba": 0,
+        "riichibou": 0
+      },
+      "players": {
+        "self": {
+          "score": 25000,
+          "isDealer": false
+        },
+        "right": {
+          "score": 25000,
+          "isDealer": true
+        },
+        "opposite": {
+          "score": 25000,
+          "isDealer": false
+        },
+        "left": {
+          "score": 25000,
+          "isDealer": false
+        }
+      }
+    },
+    "hand": {
+      "tiles": [
+        { "type": "m", "value": 2 },
+        { "type": "m", "value": 3 },
+        { "type": "m", "value": 4 },
+        { "type": "p", "value": 3 },
+        { "type": "p", "value": 4 },
+        { "type": "p", "value": 5 },
+        { "type": "s", "value": 6 },
+        { "type": "s", "value": 7 },
+        { "type": "s", "value": 8 },
+        { "type": "z", "value": 6 },
+        { "type": "z", "value": 6 },
+        { "type": "z", "value": 6 },
+        { "type": "s", "value": 5 },
+        { "type": "s", "value": 5 }
+      ]
+    },
+    "winSituation": {
+      "winType": "tsumo",
+      "winTile": { "type": "s", "value": 5 },
+      "isRiichi": true,
+      "isIppatsu": false,
+      "isTsumo": true,
+      "dora": [{ "type": "z", "value": 1 }],
+      "uraDora": [{ "type": "m", "value": 1 }]
+    },
+    "correctAnswer": {
+      "han": 3,
+      "fu": 30,
+      "yaku": [
+        { "name": "リーチ", "han": 1 },
+        { "name": "ツモ", "han": 1 },
+        { "name": "發", "han": 1 }
+      ],
+      "basePoints": 3900,
+      "tsumoScoreDealer": 2000,
+      "tsumoScoreNonDealer": 1000
+    },
+    "choicesTsumo": [
+      { "dealer": 1300, "nonDealer": 700 },
+      { "dealer": 2000, "nonDealer": 1000 },
+      { "dealer": 2600, "nonDealer": 1300 },
+      { "dealer": 3900, "nonDealer": 2000 },
+      { "dealer": 4000, "nonDealer": 2000 },
+      { "dealer": 6000, "nonDealer": 3000 }
+    ]
+  }
+]
