@@ -18,7 +18,13 @@ export default function ResultPage() {
   const [problem, setProblem] = useState<Problem | null>(null);
 
   useEffect(() => {
+    // 既にstateにデータがあれば何もしない（再マウント対策）
+    if (result) {
+      return;
+    }
+
     const lastResult = loadLastResult();
+
     if (!lastResult) {
       alert("結果が見つかりません。もう一度問題を開始してください。");
       router.push("/");
@@ -42,9 +48,9 @@ export default function ResultPage() {
       createdAt: lastResult.createdAt,
     });
 
-    // sessionStorageからクリア
-    clearLastResult();
-  }, [router]);
+    // sessionStorageからクリア（次の問題に進んだ時に上書きされるので削除）
+    // clearLastResult();
+  }, [result, router]);
 
   const handleNextProblem = () => {
     router.push("/practice");
