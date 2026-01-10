@@ -234,17 +234,17 @@ export default function PracticePage() {
                     <>
                       <Input
                         type="number"
-                        value={dealerPays}
-                        onChange={(e) => setDealerPays(e.target.value)}
-                        placeholder="例: 2000"
-                        label="親の支払い"
-                      />
-                      <Input
-                        type="number"
                         value={nonDealerPays}
                         onChange={(e) => setNonDealerPays(e.target.value)}
                         placeholder="例: 1000"
                         label="子の支払い"
+                      />
+                      <Input
+                        type="number"
+                        value={dealerPays}
+                        onChange={(e) => setDealerPays(e.target.value)}
+                        placeholder="例: 2000"
+                        label="親の支払い"
                       />
                     </>
                   ) : (
@@ -263,7 +263,7 @@ export default function PracticePage() {
                               : "border-gray-300 bg-white text-gray-700 hover:border-gray-400"
                           }`}
                         >
-                          親{choice.dealer} / 子{choice.nonDealer}
+                          子{choice.nonDealer} / 親{choice.dealer}
                         </button>
                       ))}
                     </div>
