@@ -117,7 +117,7 @@ export default function ResultPage() {
                       <>{userAnswer.score}点</>
                     ) : (
                       <>
-                        親 {userAnswer.dealerPays} / 子 {userAnswer.nonDealerPays}
+                        子 {userAnswer.nonDealerPays} / 親 {userAnswer.dealerPays}
                       </>
                     )}
                   </div>
@@ -133,8 +133,8 @@ export default function ResultPage() {
                       <>{correctAnswer.ronScore}点</>
                     ) : (
                       <>
-                        親 {correctAnswer.tsumoScoreDealer} / 子{" "}
-                        {correctAnswer.tsumoScoreNonDealer}
+                        子 {correctAnswer.tsumoScoreNonDealer} / 親{" "}
+                        {correctAnswer.tsumoScoreDealer}
                       </>
                     )}
                   </div>
