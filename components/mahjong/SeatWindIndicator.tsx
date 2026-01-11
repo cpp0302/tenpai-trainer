@@ -9,11 +9,12 @@ interface SeatWindIndicatorProps {
     opposite: PlayerInfo;
     left: PlayerInfo;
   };
+  isRiichi?: boolean;
 }
 
 type Position = "self" | "right" | "opposite" | "left";
 
-export default function SeatWindIndicator({ players }: SeatWindIndicatorProps) {
+export default function SeatWindIndicator({ players, isRiichi = false }: SeatWindIndicatorProps) {
   // 親の位置を特定
   const dealerPosition: Position = players.self.isDealer
     ? "self"
@@ -58,48 +59,55 @@ export default function SeatWindIndicator({ players }: SeatWindIndicatorProps) {
   }
 
   return (
-    <div className="relative w-64 h-64">
+    <div className="relative w-[40vh] h-[40vh] max-w-64 max-h-64 min-w-[150px] min-h-[150px]">
       {/* 上（対面） */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2">
         <div
-          className={`p-2 rounded ${
+          className={`p-1 md:p-2 rounded ${
             players.opposite.isDealer ? "bg-red-600" : "bg-gray-700"
           }`}
         >
-          <Tile tile={winds.opposite} size="md" />
+          <Tile tile={winds.opposite} size="sm" />
         </div>
       </div>
 
       {/* 右（右家） */}
       <div className="absolute right-0 top-1/2 -translate-y-1/2">
         <div
-          className={`p-2 rounded ${
+          className={`p-1 md:p-2 rounded ${
             players.right.isDealer ? "bg-red-600" : "bg-gray-700"
           }`}
         >
-          <Tile tile={winds.right} size="md" />
+          <Tile tile={winds.right} size="sm" />
         </div>
       </div>
 
       {/* 下（自分） */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2">
-        <div
-          className={`p-2 rounded ${
-            players.self.isDealer ? "bg-red-600" : "bg-gray-700"
-          }`}
-        >
-          <Tile tile={winds.self} size="md" />
+        <div className="flex flex-col items-center gap-1">
+          <div
+            className={`p-1 md:p-2 rounded ${
+              players.self.isDealer ? "bg-red-600" : "bg-gray-700"
+            }`}
+          >
+            <Tile tile={winds.self} size="sm" />
+          </div>
+          {isRiichi && (
+            <span className="inline-block bg-red-600 text-white px-2 py-0.5 rounded-full text-xs font-semibold whitespace-nowrap">
+              リーチ
+            </span>
+          )}
         </div>
       </div>
 
       {/* 左（左家） */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2">
         <div
-          className={`p-2 rounded ${
+          className={`p-1 md:p-2 rounded ${
             players.left.isDealer ? "bg-red-600" : "bg-gray-700"
           }`}
         >
-          <Tile tile={winds.left} size="md" />
+          <Tile tile={winds.left} size="sm" />
         </div>
       </div>
     </div>

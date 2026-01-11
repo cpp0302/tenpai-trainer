@@ -7,7 +7,7 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Hand from "@/components/mahjong/Hand";
 import DoraIndicator from "@/components/mahjong/DoraIndicator";
-import SeatWindIndicator from "@/components/mahjong/SeatWindIndicator";
+import TableInfoPanel from "@/components/mahjong/TableInfoPanel";
 import { Problem, UserAnswer } from "@/lib/types/problem";
 import { loadSettings } from "@/lib/storage";
 import { saveLastResult } from "@/lib/storage/session";
@@ -20,6 +20,9 @@ export default function PracticePage() {
   const [problem, setProblem] = useState<Problem | null>(null);
   const [phase, setPhase] = useState<Phase>("ready");
   const [startTime, setStartTime] = useState<number>(0);
+
+  // 画面サイズに応じた牌サイズ
+  const [tileSize, setTileSize] = useState<"sm" | "md" | "lg">("lg");
 
   // 回答入力（ロン）
   const [ronScore, setRonScore] = useState("");
@@ -40,6 +43,20 @@ export default function PracticePage() {
       router.push("/");
     }
   }, [router]);
+
+  useEffect(() => {
+    // 画面サイズに応じて牌サイズを調整
+    const updateSize = () => {
+      const width = window.innerWidth;
+      if (width < 600) setTileSize("sm");
+      else if (width < 900) setTileSize("md");
+      else setTileSize("lg");
+    };
+
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
 
   const handleStartAnimation = () => {
     setPhase("演出");
@@ -129,40 +146,32 @@ export default function PracticePage() {
   return (
     <OrientationGuard>
       <main className="min-h-screen bg-green-800 relative">
-        {/* 中央上部: 局情報 */}
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
-          <div className="text-white text-2xl font-bold bg-gray-900 px-6 py-2 rounded-lg">
-            {problem.table.round.roundWind === "east" ? "東" : "南"}
-            {problem.table.round.roundNumber}局
-          </div>
-        </div>
-
         {/* 右上: ドラ */}
-        <div className="absolute top-4 right-4 z-10 bg-gray-900 px-4 py-2 rounded-lg">
+        <div className="absolute top-2 right-2 md:top-4 md:right-4 z-10 bg-gray-900 px-2 md:px-4 py-1 md:py-2 rounded-lg">
           <DoraIndicator
             dora={problem.winSituation.dora}
             uraDora={problem.winSituation.uraDora}
             showUraDora={phase === "回答" && problem.winSituation.isRiichi}
-            size="md"
+            size="sm"
           />
         </div>
 
-        {/* 中央: 場風表示 */}
+        {/* 中央: 卓情報パネル */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-          <SeatWindIndicator players={problem.table.players} />
+          <TableInfoPanel
+            players={problem.table.players}
+            roundWind={problem.table.round.roundWind}
+            roundNumber={problem.table.round.roundNumber}
+            honba={problem.table.round.honba}
+            riichibou={problem.table.round.riichibou}
+            isRiichi={problem.winSituation.isRiichi}
+          />
         </div>
 
         {/* 下部: 手牌 */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-          <div className="text-center">
-            <div className="flex justify-center mb-2">
-              <Hand hand={problem.hand} size="lg" />
-            </div>
-            {problem.winSituation.isRiichi && (
-              <span className="inline-block bg-red-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                リーチ
-              </span>
-            )}
+        <div className="absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 z-10">
+          <div className="flex justify-center">
+            <Hand hand={problem.hand} size={tileSize} />
           </div>
         </div>
 
