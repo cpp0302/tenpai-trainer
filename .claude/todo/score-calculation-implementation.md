@@ -1,6 +1,7 @@
 # 麻雀点数計算ロジック実装TODO
 
-このTODOリストは `mellow-napping-reddy.md` の実装計画に基づいています。
+このTODOリストは麻雀点数計算のロジックを実装するためのTODOです。
+点数計算のおおまかな仕様は `/docs/score-calculation/` にまとまっています。
 
 ## 概要
 - **目標**: 問題データの正解事前計算方式から、実行時自動計算方式へ移行
@@ -13,9 +14,9 @@
 ## Phase 1: 基盤構築（2-3日）
 
 ### 1.1 環境セットアップ
-- [ ] Jestのインストールと設定
-- [ ] `/lib/calculate/`ディレクトリ作成
-- [ ] 型定義の拡張（`/lib/types/mahjong.ts`に`MeldType`, `Meld`, `WaitType`, `MeldPattern`を追加）
+- [x] Jestのインストールと設定
+- [x] `/lib/calculate/`ディレクトリ作成
+- [x] 型定義の拡張（`/lib/types/mahjong.ts`に`MeldType`, `Meld`, `WaitType`, `MeldPattern`を追加）
 
 ### 1.2 ユーティリティ実装（TDD）
 - [ ] `tile-comparator.test.ts`テスト作成

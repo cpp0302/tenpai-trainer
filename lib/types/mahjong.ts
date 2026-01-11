@@ -17,19 +17,19 @@ export interface Tile {
  */
 export interface Hand {
   tiles: Tile[];
-  melds?: Meld[]; // 鳴き（副露）
+  openMelds?: OpenMeld[]; // 副露
 }
 
 /**
- * 鳴き（副露）の種類
+ * 副露の種類
  */
-export type MeldType = "chi" | "pon" | "kan" | "ankan";
+export type OpenMeldType = "chi" | "pon" | "kan" | "ankan";
 
 /**
- * 鳴き（副露）
+ * 副露
  */
-export interface Meld {
-  type: MeldType;
+export interface OpenMeld {
+  type: OpenMeldType;
   tiles: Tile[];
 }
 
@@ -40,6 +40,25 @@ export interface Yaku {
   name: string;
   han: number; // 翻数
 }
+
+/**
+ * 待ち形の種類
+ */
+export type WaitType =
+  | "tanki"    // 単騎待ち
+  | "ryanmen"  // 両面待ち
+  | "kanchan"  // 嵌張待ち
+  | "penchan"  // 辺張待ち
+  | "shanpon"; // 双碰待ち
+
+/**
+ * 面子パターンの種類
+ */
+export type MeldPattern =
+  | "shuntsu" // 順子（123など）
+  | "koutsu"  // 刻子（111など）
+  | "kantsu"  // 槓子（1111など）
+  | "toitsu"; // 対子（11など）
 
 /**
  * 風
