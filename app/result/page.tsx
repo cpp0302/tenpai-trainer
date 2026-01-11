@@ -83,6 +83,14 @@ export default function ResultPage() {
     <OrientationGuard>
       <main className="min-h-screen bg-gray-50 p-4">
         <div className="max-w-6xl mx-auto">
+          {/* 手牌エリア（横幅いっぱい） */}
+          <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h3 className="text-lg font-bold text-gray-800 mb-4 text-center">手牌</h3>
+            <div className="flex justify-center overflow-x-auto">
+              <Hand hand={hand} size="md" />
+            </div>
+          </div>
+
           <div className="flex gap-6">
             {/* 左側: 結果サマリエリア（45%） */}
             <div className="w-[45%] bg-white rounded-2xl shadow-lg p-8">
@@ -220,14 +228,6 @@ export default function ResultPage() {
                       size="sm"
                     />
                   </div>
-                </div>
-              </div>
-
-              {/* 手牌の再掲 */}
-              <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h3 className="text-lg font-bold text-gray-800 mb-4">手牌</h3>
-                <div className="flex justify-center">
-                  <Hand hand={hand} size="md" />
                 </div>
               </div>
             </div>
