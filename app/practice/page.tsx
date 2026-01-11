@@ -147,49 +147,54 @@ export default function PracticePage() {
           </Button>
         </div>
 
-        <div className="flex-1 flex">
-          {/* 左側: 卓情報エリア（60%） */}
-          <div className="w-3/5 p-6 flex items-center justify-center">
-            <div className="bg-green-700 rounded-2xl p-8 w-full max-w-3xl">
-              <div className="text-center mb-6">
-                <div className="text-white text-sm mb-4">自分の手牌</div>
-                <div className="flex justify-center">
-                  <Hand hand={problem.hand} size="lg" />
-                </div>
-                {problem.winSituation.isRiichi && (
-                  <div className="mt-4">
-                    <span className="inline-block bg-red-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                      リーチ
-                    </span>
-                  </div>
-                )}
+        <div className="flex-1 relative flex items-center justify-center p-6">
+          {/* 卓情報エリア（全画面） */}
+          <div className="bg-green-700 rounded-2xl p-8 w-full max-w-4xl">
+            <div className="text-center mb-6">
+              <div className="text-white text-sm mb-4">自分の手牌</div>
+              <div className="flex justify-center">
+                <Hand hand={problem.hand} size="lg" />
               </div>
+              {problem.winSituation.isRiichi && (
+                <div className="mt-4">
+                  <span className="inline-block bg-red-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                    リーチ
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 
-          {/* 右側: 回答エリア（40%） */}
-          <div className="w-2/5 bg-white p-6 flex flex-col justify-center">
-            {phase === "ready" && (
-              <div className="text-center">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">準備完了</h2>
-                <p className="text-gray-600 mb-6">開始ボタンを押して出題を開始してください</p>
-                <Button onClick={handleStartAnimation} size="lg">
-                  開始
-                </Button>
+          {/* Ready Phase: オーバーレイ */}
+          {phase === "ready" && (
+            <>
+              <div className="absolute inset-0 bg-black/40 z-30" />
+              <div className="absolute top-8 left-1/2 -translate-x-1/2 w-11/12 max-w-lg z-40 bg-white rounded-2xl shadow-2xl p-8">
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold text-gray-800 mb-4">準備完了</h2>
+                  <p className="text-gray-600 mb-6">開始ボタンを押して出題を開始してください</p>
+                  <Button onClick={handleStartAnimation} size="lg">
+                    開始
+                  </Button>
+                </div>
               </div>
-            )}
+            </>
+          )}
 
-            {phase === "演出" && (
-              <div className="text-center">
-                <p className="text-gray-600 mb-4">数巡進行中...</p>
-                <Button onClick={handleSkip} variant="secondary">
-                  スキップ
-                </Button>
-              </div>
-            )}
+          {/* 演出 Phase: スキップボタン（右上） */}
+          {phase === "演出" && (
+            <div className="absolute top-2 right-2 md:top-4 md:right-4 z-50">
+              <Button onClick={handleSkip} variant="secondary" size="sm">
+                スキップ
+              </Button>
+            </div>
+          )}
 
-            {phase === "回答" && (
-              <div>
+          {/* 回答 Phase: オーバーレイ */}
+          {phase === "回答" && (
+            <>
+              <div className="absolute inset-0 bg-black/40 z-30" />
+              <div className="absolute top-8 left-1/2 -translate-x-1/2 w-11/12 max-w-lg z-40 bg-white rounded-2xl shadow-2xl p-6 max-h-[80vh] overflow-y-auto">
                 <div className="mb-6">
                   <div className="text-center mb-4">
                     <span className="inline-block bg-yellow-500 text-white px-6 py-3 rounded-lg text-2xl font-bold">
@@ -279,8 +284,8 @@ export default function PracticePage() {
                   </div>
                 </div>
               </div>
-            )}
-          </div>
+            </>
+          )}
         </div>
       </main>
     </OrientationGuard>
