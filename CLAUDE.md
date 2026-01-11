@@ -1,5 +1,7 @@
 # CLAUDE.md - 麻雀点数計算トレーニングアプリ
 
+常に日本語で会話してください
+
 このドキュメントは、Claude（AI）がこのプロジェクトを理解し、効果的に開発をサポートするための情報をまとめたものです。
 
 ## プロジェクト概要
@@ -30,6 +32,12 @@
 ## ディレクトリ構成
 
 ```
+/docs                          # 要件定義などの各種ドキュメント
+  requirements-definition.md   # 要件定義
+  technical-requirements.md    # 技術要件
+  ui-wire.md                   # UIワイヤー
+  /screen-specifications       # 各画面の仕様書
+
 /app                           # Next.js App Router
   page.tsx                     # ホーム画面（設定選択）
   layout.tsx                   # ルートレイアウト
