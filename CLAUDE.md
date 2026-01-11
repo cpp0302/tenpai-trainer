@@ -241,6 +241,10 @@
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Tailwind CSS](https://tailwindcss.com/docs)
 - [牌素材リポジトリ](https://github.com/FluffyStuff/riichi-mahjong-tiles)
+- [麻雀用語、英語でどう言う？](https://shop.taiyo-chemicals.co.jp/blog/?p=1892&srsltid=AfmBOoqImOOzMS_pZ4jX3vzJk4MCqv0XZOhruHWKEGKmEzGw0XcleXOE)
+  - 英語名の取得はこちら優先
+- [麻雀用語英名一覧](http://crescent.s255.xrea.com/cabinet/others/mahjong/)
+  - 1つ上のサイトで見当たらなかった場合はこちらを参照
 
 ## コミット履歴
 
