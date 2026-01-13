@@ -1,7 +1,7 @@
 /**
  * 牌の種類
  */
-export type TileType = "m" | "p" | "s" | "z"; // 萬子、筒子、索子、字牌
+export type TileType = "m" | "p" | "s" | "j"; // 萬子、筒子、索子、字牌
 
 /**
  * 牌（1枚）

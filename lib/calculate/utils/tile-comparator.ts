@@ -10,7 +10,7 @@ function getTypeOrder(type: string): number {
     m: 0, // 萬子
     p: 1, // 筒子
     s: 2, // 索子
-    z: 3, // 字牌
+    j: 3, // 字牌
   };
   return order[type] ?? 999;
 }

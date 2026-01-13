@@ -23,7 +23,7 @@ export function tileToFileName(tile: Tile): string {
   if (type === "s") return `Sou${value}.svg`;
 
   // 字牌
-  if (type === "z") {
+  if (type === "j") {
     const zihai = ["Ton", "Nan", "Shaa", "Pei", "Haku", "Hatsu", "Chun"];
     return `${zihai[value - 1]}.svg`;
   }
@@ -42,7 +42,7 @@ export function tileToString(tile: Tile): string {
   if (type === "p") return `${redMark}${value}筒`;
   if (type === "s") return `${redMark}${value}索`;
 
-  if (type === "z") {
+  if (type === "j") {
     const zihai = ["東", "南", "西", "北", "白", "發", "中"];
     return zihai[value - 1];
   }
@@ -59,7 +59,7 @@ export function stringToTile(str: string): Tile {
   const cleanStr = str.replace(/^(r|赤)/, "");
 
   const value = parseInt(cleanStr[0]);
-  const type = cleanStr[1] as "m" | "p" | "s" | "z";
+  const type = cleanStr[1] as "m" | "p" | "s" | "j";
 
   return { type, value, isRed };
 }

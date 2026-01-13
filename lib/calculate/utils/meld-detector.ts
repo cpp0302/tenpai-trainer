@@ -85,7 +85,7 @@ export function detectKoutsu(tiles: Tile[], targetTile: Tile): Tile[] | null {
  */
 export function detectShuntsu(tiles: Tile[], startTile: Tile): Tile[] | null {
   // 字牌は順子を作れない
-  if (startTile.type === "z") {
+  if (startTile.type === "j") {
     return null;
   }
 

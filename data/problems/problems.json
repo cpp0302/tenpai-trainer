@@ -39,9 +39,9 @@
         { "type": "s", "value": 6 },
         { "type": "s", "value": 7 },
         { "type": "s", "value": 8 },
-        { "type": "z", "value": 6 },
-        { "type": "z", "value": 6 },
-        { "type": "z", "value": 6 },
+        { "type": "j", "value": 6 },
+        { "type": "j", "value": 6 },
+        { "type": "j", "value": 6 },
         { "type": "s", "value": 5 },
         { "type": "s", "value": 5 }
       ]
@@ -52,7 +52,7 @@
       "isRiichi": true,
       "isIppatsu": false,
       "isTsumo": true,
-      "dora": [{ "type": "z", "value": 1 }],
+      "dora": [{ "type": "j", "value": 1 }],
       "uraDora": [{ "type": "m", "value": 1 }]
     },
     "correctAnswer": {

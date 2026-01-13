@@ -172,10 +172,10 @@ describe("meld-detector", () => {
 
       test("字牌の対子", () => {
         const tiles: Tile[] = [
-          { type: "z", value: 6 },
-          { type: "z", value: 6 },
+          { type: "j", value: 6 },
+          { type: "j", value: 6 },
         ];
-        const result = detectToitsu(tiles, { type: "z", value: 6 });
+        const result = detectToitsu(tiles, { type: "j", value: 6 });
         expect(result).toHaveLength(2);
       });
     });
@@ -259,11 +259,11 @@ describe("meld-detector", () => {
 
       test("字牌の刻子", () => {
         const tiles: Tile[] = [
-          { type: "z", value: 1 },
-          { type: "z", value: 1 },
-          { type: "z", value: 1 },
+          { type: "j", value: 1 },
+          { type: "j", value: 1 },
+          { type: "j", value: 1 },
         ];
-        const result = detectKoutsu(tiles, { type: "z", value: 1 });
+        const result = detectKoutsu(tiles, { type: "j", value: 1 });
         expect(result).toHaveLength(3);
       });
     });
@@ -431,11 +431,11 @@ describe("meld-detector", () => {
     describe("異常系", () => {
       test("字牌から始まる場合（nullを返す）", () => {
         const tiles: Tile[] = [
-          { type: "z", value: 1 },
-          { type: "z", value: 2 },
-          { type: "z", value: 3 },
+          { type: "j", value: 1 },
+          { type: "j", value: 2 },
+          { type: "j", value: 3 },
         ];
-        const result = detectShuntsu(tiles, { type: "z", value: 1 });
+        const result = detectShuntsu(tiles, { type: "j", value: 1 });
         expect(result).toBeNull();
       });
 
@@ -513,10 +513,10 @@ describe("meld-detector", () => {
 
       test("字牌を含む", () => {
         const tiles: Tile[] = [
-          { type: "z", value: 1 },
-          { type: "z", value: 1 },
-          { type: "z", value: 2 },
-          { type: "z", value: 2 },
+          { type: "j", value: 1 },
+          { type: "j", value: 1 },
+          { type: "j", value: 2 },
+          { type: "j", value: 2 },
         ];
         const result = findAllToitsuCandidates(tiles);
         expect(result).toHaveLength(2);

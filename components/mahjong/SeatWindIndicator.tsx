@@ -26,36 +26,36 @@ export default function SeatWindIndicator({ players, isRiichi = false }: SeatWin
 
   // 各位置の場風を計算
   const winds: Record<Position, TileType> = {
-    self: { type: "z", value: 1 }, // デフォルト値
-    right: { type: "z", value: 1 },
-    opposite: { type: "z", value: 1 },
-    left: { type: "z", value: 1 },
+    self: { type: "j", value: 1 }, // デフォルト値
+    right: { type: "j", value: 1 },
+    opposite: { type: "j", value: 1 },
+    left: { type: "j", value: 1 },
   };
 
   // 親の位置から各プレイヤーの場風を割り当て
   // 東(1) → 南(2) → 西(3) → 北(4)
   // 順番: self → right → opposite → left
   if (dealerPosition === "self") {
-    winds.self = { type: "z", value: 1 }; // 東
-    winds.right = { type: "z", value: 2 }; // 南
-    winds.opposite = { type: "z", value: 3 }; // 西
-    winds.left = { type: "z", value: 4 }; // 北
+    winds.self = { type: "j", value: 1 }; // 東
+    winds.right = { type: "j", value: 2 }; // 南
+    winds.opposite = { type: "j", value: 3 }; // 西
+    winds.left = { type: "j", value: 4 }; // 北
   } else if (dealerPosition === "right") {
-    winds.right = { type: "z", value: 1 }; // 東
-    winds.opposite = { type: "z", value: 2 }; // 南
-    winds.left = { type: "z", value: 3 }; // 西
-    winds.self = { type: "z", value: 4 }; // 北
+    winds.right = { type: "j", value: 1 }; // 東
+    winds.opposite = { type: "j", value: 2 }; // 南
+    winds.left = { type: "j", value: 3 }; // 西
+    winds.self = { type: "j", value: 4 }; // 北
   } else if (dealerPosition === "opposite") {
-    winds.opposite = { type: "z", value: 1 }; // 東
-    winds.left = { type: "z", value: 2 }; // 南
-    winds.self = { type: "z", value: 3 }; // 西
-    winds.right = { type: "z", value: 4 }; // 北
+    winds.opposite = { type: "j", value: 1 }; // 東
+    winds.left = { type: "j", value: 2 }; // 南
+    winds.self = { type: "j", value: 3 }; // 西
+    winds.right = { type: "j", value: 4 }; // 北
   } else {
     // left
-    winds.left = { type: "z", value: 1 }; // 東
-    winds.self = { type: "z", value: 2 }; // 南
-    winds.right = { type: "z", value: 3 }; // 西
-    winds.opposite = { type: "z", value: 4 }; // 北
+    winds.left = { type: "j", value: 1 }; // 東
+    winds.self = { type: "j", value: 2 }; // 南
+    winds.right = { type: "j", value: 3 }; // 西
+    winds.opposite = { type: "j", value: 4 }; // 北
   }
 
   return (

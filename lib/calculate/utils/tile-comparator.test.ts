@@ -19,7 +19,7 @@ describe("tile-comparator", () => {
 
       test("索子 < 字牌", () => {
         const tile1: Tile = { type: "s", value: 5 };
-        const tile2: Tile = { type: "z", value: 1 };
+        const tile2: Tile = { type: "j", value: 1 };
         expect(compareTiles(tile1, tile2)).toBeLessThan(0);
       });
     });
@@ -38,8 +38,8 @@ describe("tile-comparator", () => {
       });
 
       test("東 < 南", () => {
-        const tile1: Tile = { type: "z", value: 1 };
-        const tile2: Tile = { type: "z", value: 2 };
+        const tile1: Tile = { type: "j", value: 1 };
+        const tile2: Tile = { type: "j", value: 2 };
         expect(compareTiles(tile1, tile2)).toBeLessThan(0);
       });
     });
@@ -72,8 +72,8 @@ describe("tile-comparator", () => {
       });
 
       test("中 === 中", () => {
-        const tile1: Tile = { type: "z", value: 7 };
-        const tile2: Tile = { type: "z", value: 7 };
+        const tile1: Tile = { type: "j", value: 7 };
+        const tile2: Tile = { type: "j", value: 7 };
         expect(compareTiles(tile1, tile2)).toBe(0);
       });
     });
@@ -86,8 +86,8 @@ describe("tile-comparator", () => {
       });
 
       test("東 < 中", () => {
-        const tile1: Tile = { type: "z", value: 1 };
-        const tile2: Tile = { type: "z", value: 7 };
+        const tile1: Tile = { type: "j", value: 1 };
+        const tile2: Tile = { type: "j", value: 7 };
         expect(compareTiles(tile1, tile2)).toBeLessThan(0);
       });
     });
@@ -154,14 +154,14 @@ describe("tile-comparator", () => {
 
     describe("字牌での判定", () => {
       test("東 === 東", () => {
-        const tile1: Tile = { type: "z", value: 1 };
-        const tile2: Tile = { type: "z", value: 1 };
+        const tile1: Tile = { type: "j", value: 1 };
+        const tile2: Tile = { type: "j", value: 1 };
         expect(isSameTile(tile1, tile2)).toBe(true);
       });
 
       test("白 !== 發", () => {
-        const tile1: Tile = { type: "z", value: 5 };
-        const tile2: Tile = { type: "z", value: 6 };
+        const tile1: Tile = { type: "j", value: 5 };
+        const tile2: Tile = { type: "j", value: 6 };
         expect(isSameTile(tile1, tile2)).toBe(false);
       });
     });
@@ -171,7 +171,7 @@ describe("tile-comparator", () => {
     describe("正常系", () => {
       test("バラバラの牌をソート", () => {
         const tiles: Tile[] = [
-          { type: "z", value: 1 },
+          { type: "j", value: 1 },
           { type: "m", value: 3 },
           { type: "p", value: 5 },
           { type: "s", value: 2 },
@@ -183,7 +183,7 @@ describe("tile-comparator", () => {
           { type: "m", value: 3 },
           { type: "p", value: 5 },
           { type: "s", value: 2 },
-          { type: "z", value: 1 },
+          { type: "j", value: 1 },
         ]);
       });
 
@@ -200,7 +200,7 @@ describe("tile-comparator", () => {
 
       test("逆順の配列", () => {
         const tiles: Tile[] = [
-          { type: "z", value: 7 },
+          { type: "j", value: 7 },
           { type: "s", value: 9 },
           { type: "p", value: 5 },
           { type: "m", value: 1 },
@@ -210,7 +210,7 @@ describe("tile-comparator", () => {
           { type: "m", value: 1 },
           { type: "p", value: 5 },
           { type: "s", value: 9 },
-          { type: "z", value: 7 },
+          { type: "j", value: 7 },
         ]);
       });
 
@@ -254,11 +254,11 @@ describe("tile-comparator", () => {
           { type: "p", value: 4 },
           { type: "s", value: 7 },
           { type: "s", value: 7 },
-          { type: "z", value: 1 },
-          { type: "z", value: 1 },
-          { type: "z", value: 1 },
-          { type: "z", value: 6 },
-          { type: "z", value: 6 },
+          { type: "j", value: 1 },
+          { type: "j", value: 1 },
+          { type: "j", value: 1 },
+          { type: "j", value: 6 },
+          { type: "j", value: 6 },
         ];
         const unsorted = [
           tiles[8], tiles[10], tiles[0], tiles[6], tiles[1],
@@ -304,7 +304,7 @@ describe("tile-comparator", () => {
   describe("sortTilesCopy", () => {
     test("元の配列を変更しない", () => {
       const tiles: Tile[] = [
-        { type: "z", value: 1 },
+        { type: "j", value: 1 },
         { type: "m", value: 1 },
         { type: "p", value: 1 },
       ];
@@ -318,7 +318,7 @@ describe("tile-comparator", () => {
       expect(sorted).toEqual([
         { type: "m", value: 1 },
         { type: "p", value: 1 },
-        { type: "z", value: 1 },
+        { type: "j", value: 1 },
       ]);
     });
 
