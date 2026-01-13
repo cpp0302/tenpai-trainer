@@ -61,6 +61,24 @@ export type MeldPattern =
   | "toitsu"; // 対子（11など）
 
 /**
+ * 面子（順子・刻子・対子など）
+ */
+export interface Meld {
+  pattern: MeldPattern;
+  tiles: Tile[];
+}
+
+/**
+ * 手牌の面子構成パターン
+ */
+export interface HandPattern {
+  melds: Meld[]; // 面子のリスト（通常は4面子1雀頭、七対子は7対子、国士無双は特殊形）
+  waitType?: WaitType; // 待ち形（あれば）
+  isChiitoitsu?: boolean; // 七対子かどうか
+  isKokushi?: boolean; // 国士無双かどうか
+}
+
+/**
  * 風
  */
 export type Wind = "east" | "south" | "west" | "north";
