@@ -4,195 +4,187 @@ import { analyzeHand, HandPattern, Meld } from "./hand-analyzer";
 describe("hand-analyzer", () => {
   describe("analyzeHand", () => {
     describe("標準形（4面子1雀頭）", () => {
-      test("単一パターン: 123m 456p 567s 789s 東東 + 5s", () => {
-        // 手牌: 123m 456p 67s 789s 東東 + 5s（和了牌）
-        const tiles: Tile[] = [
-          { type: "m", value: 1 },
-          { type: "m", value: 2 },
-          { type: "m", value: 3 },
-          { type: "p", value: 4 },
-          { type: "p", value: 5 },
-          { type: "p", value: 6 },
-          { type: "s", value: 5 }, // 和了牌
-          { type: "s", value: 6 },
-          { type: "s", value: 7 },
-          { type: "s", value: 7 },
-          { type: "s", value: 8 },
-          { type: "s", value: 9 },
-          { type: "j", value: 1 }, // 東
-          { type: "j", value: 1 }, // 東
-        ];
-
-        const winTile: Tile = { type: "s", value: 5 };
+      test.each([
+        {
+          description: "単一パターン: 123m 456p 67s 789s 東東 + 5s",
+          tiles: [
+            { type: "m", value: 1 },
+            { type: "m", value: 2 },
+            { type: "m", value: 3 },
+            { type: "p", value: 4 },
+            { type: "p", value: 5 },
+            { type: "p", value: 6 },
+            { type: "s", value: 5 }, // 和了牌
+            { type: "s", value: 6 },
+            { type: "s", value: 7 },
+            { type: "s", value: 7 },
+            { type: "s", value: 8 },
+            { type: "s", value: 9 },
+            { type: "j", value: 1 }, // 東
+            { type: "j", value: 1 }, // 東
+          ] as Tile[],
+          winTile: { type: "s", value: 5 } as Tile,
+          expected: [
+            {
+              melds: [
+                {
+                  pattern: "shuntsu",
+                  tiles: [
+                    { type: "m", value: 1 },
+                    { type: "m", value: 2 },
+                    { type: "m", value: 3 },
+                  ],
+                },
+                {
+                  pattern: "shuntsu",
+                  tiles: [
+                    { type: "p", value: 4 },
+                    { type: "p", value: 5 },
+                    { type: "p", value: 6 },
+                  ],
+                },
+                {
+                  pattern: "shuntsu",
+                  tiles: [
+                    { type: "s", value: 5 },
+                    { type: "s", value: 6 },
+                    { type: "s", value: 7 },
+                  ],
+                },
+                {
+                  pattern: "shuntsu",
+                  tiles: [
+                    { type: "s", value: 7 },
+                    { type: "s", value: 8 },
+                    { type: "s", value: 9 },
+                  ],
+                },
+                {
+                  pattern: "toitsu",
+                  tiles: [
+                    { type: "j", value: 1 },
+                    { type: "j", value: 1 },
+                  ],
+                },
+              ],
+              waitType: "ryanmen",
+            },
+          ] as HandPattern[],
+        },
+        {
+          description: "複数パターン: 1112233m 456p 789s + 1m",
+          tiles: [
+            { type: "m", value: 1 }, // 和了牌
+            { type: "m", value: 1 },
+            { type: "m", value: 1 },
+            { type: "m", value: 1 },
+            { type: "m", value: 2 },
+            { type: "m", value: 2 },
+            { type: "m", value: 3 },
+            { type: "m", value: 3 },
+            { type: "p", value: 4 },
+            { type: "p", value: 5 },
+            { type: "p", value: 6 },
+            { type: "s", value: 7 },
+            { type: "s", value: 8 },
+            { type: "s", value: 9 },
+          ] as Tile[],
+          winTile: { type: "m", value: 1 } as Tile,
+          expected: [
+            {
+              // 1m + 123m + 123m + 456p + 789s + 1m 単騎待ち
+              melds: [
+                {
+                  pattern: "toitsu",
+                  tiles: [
+                    { type: "m", value: 1 },
+                    { type: "m", value: 1 },
+                  ],
+                },
+                {
+                  pattern: "shuntsu",
+                  tiles: [
+                    { type: "m", value: 1 },
+                    { type: "m", value: 2 },
+                    { type: "m", value: 3 },
+                  ],
+                },
+                {
+                  pattern: "shuntsu",
+                  tiles: [
+                    { type: "m", value: 2 },
+                    { type: "m", value: 3 },
+                    { type: "m", value: 3 },
+                  ],
+                },
+                {
+                  pattern: "shuntsu",
+                  tiles: [
+                    { type: "p", value: 4 },
+                    { type: "p", value: 5 },
+                    { type: "p", value: 6 },
+                  ],
+                },
+                {
+                  pattern: "shuntsu",
+                  tiles: [
+                    { type: "s", value: 7 },
+                    { type: "s", value: 8 },
+                    { type: "s", value: 9 },
+                  ],
+                },
+              ],
+              waitType: "tanki",
+            },
+            {
+              // 11m + 23m + 123m + 456p + 789s + 1m リャンメン待ち
+              melds: [
+                {
+                  pattern: "toitsu",
+                  tiles: [
+                    { type: "m", value: 1 },
+                    { type: "m", value: 1 },
+                  ],
+                },
+                {
+                  pattern: "shuntsu",
+                  tiles: [
+                    { type: "m", value: 1 },
+                    { type: "m", value: 2 },
+                    { type: "m", value: 3 },
+                  ],
+                },
+                {
+                  pattern: "shuntsu",
+                  tiles: [
+                    { type: "m", value: 2 },
+                    { type: "m", value: 3 },
+                    { type: "m", value: 3 },
+                  ],
+                },
+                {
+                  pattern: "shuntsu",
+                  tiles: [
+                    { type: "p", value: 4 },
+                    { type: "p", value: 5 },
+                    { type: "p", value: 6 },
+                  ],
+                },
+                {
+                  pattern: "shuntsu",
+                  tiles: [
+                    { type: "s", value: 7 },
+                    { type: "s", value: 8 },
+                    { type: "s", value: 9 },
+                  ],
+                },
+              ],
+              waitType: "ryanmen",
+            },
+          ] as HandPattern[],
+        },
+      ])("$description", ({ tiles, winTile, expected }) => {
         const result = analyzeHand(tiles, winTile);
-
-        // 期待される結果を定義
-        const expected: HandPattern[] = [
-          {
-            melds: [
-              {
-                pattern: "shuntsu",
-                tiles: [
-                  { type: "m", value: 1 },
-                  { type: "m", value: 2 },
-                  { type: "m", value: 3 },
-                ],
-              },
-              {
-                pattern: "shuntsu",
-                tiles: [
-                  { type: "p", value: 4 },
-                  { type: "p", value: 5 },
-                  { type: "p", value: 6 },
-                ],
-              },
-              {
-                pattern: "shuntsu",
-                tiles: [
-                  { type: "s", value: 5 },
-                  { type: "s", value: 6 },
-                  { type: "s", value: 7 },
-                ],
-              },
-              {
-                pattern: "shuntsu",
-                tiles: [
-                  { type: "s", value: 7 },
-                  { type: "s", value: 8 },
-                  { type: "s", value: 9 },
-                ],
-              },
-              {
-                pattern: "toitsu",
-                tiles: [
-                  { type: "j", value: 1 },
-                  { type: "j", value: 1 },
-                ],
-              },
-            ],
-          },
-        ];
-
-        // ディープイコールで検証
-        expect(result).toEqual(expected);
-      });
-
-      test("複数パターン: 112233m 456p 789s + 1m", () => {
-        // 手牌: 112233m 456p 789s + 1m（和了牌）
-        // パターン1: 11m(雀頭) + 123m + 123m + 456p + 789s
-        // パターン2: 123m + 123m + 33m(雀頭) + 456p + 789s
-        const tiles: Tile[] = [
-          { type: "m", value: 1 }, // 和了牌
-          { type: "m", value: 1 },
-          { type: "m", value: 1 },
-          { type: "m", value: 2 },
-          { type: "m", value: 2 },
-          { type: "m", value: 3 },
-          { type: "m", value: 3 },
-          { type: "p", value: 4 },
-          { type: "p", value: 5 },
-          { type: "p", value: 6 },
-          { type: "s", value: 7 },
-          { type: "s", value: 8 },
-          { type: "s", value: 9 },
-        ];
-
-        const winTile: Tile = { type: "m", value: 1 };
-        const result = analyzeHand(tiles, winTile);
-
-        // 期待される結果を定義（2通りのパターン）
-        const expected: HandPattern[] = [
-          {
-            // パターン1: 11m(雀頭) + 123m + 123m + 456p + 789s
-            melds: [
-              {
-                pattern: "toitsu",
-                tiles: [
-                  { type: "m", value: 1 },
-                  { type: "m", value: 1 },
-                ],
-              },
-              {
-                pattern: "shuntsu",
-                tiles: [
-                  { type: "m", value: 1 },
-                  { type: "m", value: 2 },
-                  { type: "m", value: 3 },
-                ],
-              },
-              {
-                pattern: "shuntsu",
-                tiles: [
-                  { type: "m", value: 2 },
-                  { type: "m", value: 3 },
-                  { type: "m", value: 3 },
-                ],
-              },
-              {
-                pattern: "shuntsu",
-                tiles: [
-                  { type: "p", value: 4 },
-                  { type: "p", value: 5 },
-                  { type: "p", value: 6 },
-                ],
-              },
-              {
-                pattern: "shuntsu",
-                tiles: [
-                  { type: "s", value: 7 },
-                  { type: "s", value: 8 },
-                  { type: "s", value: 9 },
-                ],
-              },
-            ],
-          },
-          {
-            // パターン2: 123m + 123m + 33m(雀頭) + 456p + 789s
-            melds: [
-              {
-                pattern: "shuntsu",
-                tiles: [
-                  { type: "m", value: 1 },
-                  { type: "m", value: 2 },
-                  { type: "m", value: 3 },
-                ],
-              },
-              {
-                pattern: "shuntsu",
-                tiles: [
-                  { type: "m", value: 1 },
-                  { type: "m", value: 2 },
-                  { type: "m", value: 3 },
-                ],
-              },
-              {
-                pattern: "toitsu",
-                tiles: [
-                  { type: "m", value: 3 },
-                  { type: "m", value: 3 },
-                ],
-              },
-              {
-                pattern: "shuntsu",
-                tiles: [
-                  { type: "p", value: 4 },
-                  { type: "p", value: 5 },
-                  { type: "p", value: 6 },
-                ],
-              },
-              {
-                pattern: "shuntsu",
-                tiles: [
-                  { type: "s", value: 7 },
-                  { type: "s", value: 8 },
-                  { type: "s", value: 9 },
-                ],
-              },
-            ],
-          },
-        ];
-
-        // ディープイコールで検証
         expect(result).toEqual(expected);
       });
     });
