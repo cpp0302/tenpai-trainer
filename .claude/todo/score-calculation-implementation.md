@@ -19,10 +19,10 @@
 - [x] 型定義の拡張（`/lib/types/mahjong.ts`に`MeldType`, `Meld`, `WaitType`, `MeldPattern`を追加）
 
 ### 1.2 ユーティリティ実装（TDD）
-- [ ] `tile-comparator.test.ts`テスト作成
-- [ ] `tile-comparator.ts`実装（牌のソート・比較・同一判定）
-- [ ] `meld-detector.test.ts`テスト作成
-- [ ] `meld-detector.ts`実装（順子・刻子・対子の検出）
+- [x] `tile-comparator.test.ts`テスト作成
+- [x] `tile-comparator.ts`実装（牌のソート・比較・同一判定）
+- [x] `meld-detector.test.ts`テスト作成
+- [x] `meld-detector.ts`実装（順子・刻子・対子の検出）
 
 ---
 
