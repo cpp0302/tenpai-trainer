@@ -190,83 +190,122 @@ describe("hand-analyzer", () => {
     });
 
     describe("七対子", () => {
-      test("七対子の判定", () => {
-        // 手牌: 11m 22p 33s 44m 55p 66s + 77m（和了牌）
-        const tiles: Tile[] = [
-          { type: "m", value: 1 },
-          { type: "m", value: 1 },
-          { type: "p", value: 2 },
-          { type: "p", value: 2 },
-          { type: "s", value: 3 },
-          { type: "s", value: 3 },
-          { type: "m", value: 4 },
-          { type: "m", value: 4 },
-          { type: "p", value: 5 },
-          { type: "p", value: 5 },
-          { type: "s", value: 6 },
-          { type: "s", value: 6 },
-          { type: "m", value: 7 }, // 和了牌
-          { type: "m", value: 7 },
-        ];
-
-        const winTile: Tile = { type: "m", value: 7 };
+      test.each([
+        {
+          description: "七対子: 114477m 2255p 3366s + 7m",
+          tiles: [
+            { type: "m", value: 1 },
+            { type: "m", value: 1 },
+            { type: "p", value: 2 },
+            { type: "p", value: 2 },
+            { type: "s", value: 3 },
+            { type: "s", value: 3 },
+            { type: "m", value: 4 },
+            { type: "m", value: 4 },
+            { type: "p", value: 5 },
+            { type: "p", value: 5 },
+            { type: "s", value: 6 },
+            { type: "s", value: 6 },
+            { type: "m", value: 7 }, // 和了牌
+            { type: "m", value: 7 },
+          ] as Tile[],
+          winTile: { type: "m", value: 7 } as Tile,
+          expected: [
+            {
+              melds: [
+                {
+                  pattern: "toitsu",
+                  tiles: [
+                    { type: "m", value: 1 },
+                    { type: "m", value: 1 },
+                  ],
+                },
+                {
+                  pattern: "toitsu",
+                  tiles: [
+                    { type: "p", value: 2 },
+                    { type: "p", value: 2 },
+                  ],
+                },
+                {
+                  pattern: "toitsu",
+                  tiles: [
+                    { type: "s", value: 3 },
+                    { type: "s", value: 3 },
+                  ],
+                },
+                {
+                  pattern: "toitsu",
+                  tiles: [
+                    { type: "m", value: 4 },
+                    { type: "m", value: 4 },
+                  ],
+                },
+                {
+                  pattern: "toitsu",
+                  tiles: [
+                    { type: "p", value: 5 },
+                    { type: "p", value: 5 },
+                  ],
+                },
+                {
+                  pattern: "toitsu",
+                  tiles: [
+                    { type: "s", value: 6 },
+                    { type: "s", value: 6 },
+                  ],
+                },
+                {
+                  pattern: "toitsu",
+                  tiles: [
+                    { type: "m", value: 7 },
+                    { type: "m", value: 7 },
+                  ],
+                },
+              ],
+              waitType: "tanki",
+              isChiitoitsu: true,
+            },
+          ] as HandPattern[],
+        },
+      ])("$description", ({ tiles, winTile, expected }) => {
         const result = analyzeHand(tiles, winTile);
-
-        // 少なくとも1つのパターンが存在
-        expect(result.length).toBeGreaterThanOrEqual(1);
-
-        // 七対子パターンを探す
-        const chiitoitsuPattern = result.find((p) => {
-          const toitsu = p.melds.filter((m) => m.pattern === "toitsu");
-          return toitsu.length === 7;
-        });
-
-        expect(chiitoitsuPattern).toBeDefined();
-        expect(chiitoitsuPattern!.melds).toHaveLength(7);
-
-        // 全て対子
-        chiitoitsuPattern!.melds.forEach((meld) => {
-          expect(meld.pattern).toBe("toitsu");
-          expect(meld.tiles).toHaveLength(2);
-        });
+        expect(result).toEqual(expected);
       });
     });
 
     describe("国士無双", () => {
-      test("国士無双の判定", () => {
-        // 手牌: 19m 19p 19s 東南西北白發中 + 1m（和了牌）
-        const tiles: Tile[] = [
-          { type: "m", value: 1 }, // 和了牌
-          { type: "m", value: 1 },
-          { type: "m", value: 9 },
-          { type: "p", value: 1 },
-          { type: "p", value: 9 },
-          { type: "s", value: 1 },
-          { type: "s", value: 9 },
-          { type: "j", value: 1 }, // 東
-          { type: "j", value: 2 }, // 南
-          { type: "j", value: 3 }, // 西
-          { type: "j", value: 4 }, // 北
-          { type: "j", value: 5 }, // 白
-          { type: "j", value: 6 }, // 發
-          { type: "j", value: 7 }, // 中
-        ];
-
-        const winTile: Tile = { type: "m", value: 1 };
+      test.each([
+        {
+          description: "国士無双: 19m 19p 19s 東南西北白發中 + 1m",
+          tiles: [
+            { type: "m", value: 1 }, // 和了牌
+            { type: "m", value: 1 },
+            { type: "m", value: 9 },
+            { type: "p", value: 1 },
+            { type: "p", value: 9 },
+            { type: "s", value: 1 },
+            { type: "s", value: 9 },
+            { type: "j", value: 1 }, // 東
+            { type: "j", value: 2 }, // 南
+            { type: "j", value: 3 }, // 西
+            { type: "j", value: 4 }, // 北
+            { type: "j", value: 5 }, // 白
+            { type: "j", value: 6 }, // 發
+            { type: "j", value: 7 }, // 中
+          ] as Tile[],
+          winTile: { type: "m", value: 1 } as Tile,
+          expected: [
+            {
+              melds: [],
+              waitType: "tanki",
+              isKokushi: true,
+            },
+          ] as HandPattern[],
+        },
+      ])("$description", ({ tiles, winTile, expected }) => {
         const result = analyzeHand(tiles, winTile);
-
-        // 少なくとも1つのパターンが存在
-        expect(result.length).toBeGreaterThanOrEqual(1);
-
-        // 国士無双パターンを探す
-        const kokushiPattern = result.find((p) => p.isKokushi);
-
-        expect(kokushiPattern).toBeDefined();
-        expect(kokushiPattern!.isKokushi).toBe(true);
-
-        // 国士無双は特殊形なので、meldsの構造は自由に定義できる
-        // ここでは13種の么九牌+1つの対子として表現されることを期待
-        expect(kokushiPattern!.melds.length).toBeGreaterThan(0);
+        expect(result).toEqual(expected);
       });
     });
 
